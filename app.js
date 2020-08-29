@@ -6,7 +6,7 @@ const userScore_span = document.querySelector('#userScore');
 const compScore_span = document.querySelector('#compScore');
 const result_p = document.querySelector('#result');
 
-const paperButton_img = document.querySelector('#paperButton');
+const PapelButton_img = document.querySelector('#paperButton');
 const rockButton_img = document.querySelector('#rockButton');
 const scissorsButton_img = document.querySelector('#scissorsButton');
 
@@ -16,89 +16,103 @@ jogadasPossiveis = ['pedra', 'papel', 'tesoura'];
 
 
 function jogo(cliqueDoUsuario) {
+    let jogada = 0;
 
-    console.log(cliqueDoUsuario);
+
     n = Math.floor(Math.random() * 3);
     cliqueDoComputador = jogadasPossiveis[n];
-    paperButton_img.classList.remove('green-glow');
-    paperButton_img.classList.remove('red-glow');
-    paperButton_img.classList.remove('gray-glow');
 
-    rockButton_img.classList.remove('green-glow');
-    rockButton_img.classList.remove('red-glow');
-    rockButton_img.classList.remove('gray-glow');
-
-    scissorsButton_img.classList.remove('green-glow');
-    scissorsButton_img.classList.remove('red-glow');
-    scissorsButton_img.classList.remove('gray-glow');
+    PapelButton_img.className = "";
+    rockButton_img.className = "";
+    scissorsButton_img.className = "";
 
     switch (cliqueDoUsuario + cliqueDoComputador) {
 
-        case 'papelpapel':
-            paperButton_img.classList.add('gray-glow');
+        case 'Papelpapel':
+            // window(string(cliqueDoUsuario) + 'Button_img').classList.add('gray-glow');
+            PapelButton_img.classList.add('gray-glow');
             action = 'empata';
-            pontuacaoComputador = pontuacaoComputador + 1;
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoComputador++;
+            pontuacaoUsuario++;
             break;
-        case 'pedrapedra':
+        case 'Pedrapedra':
             rockButton_img.classList.add('gray-glow');
             action = 'empata';
-            pontuacaoComputador = pontuacaoComputador + 1;
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoComputador++;
+            pontuacaoUsuario++;
             break;
-        case 'tesouratesoura':
+        case 'Tesouratesoura':
             scissorsButton_img.classList.add('gray-glow');
             action = 'empata';
-            pontuacaoComputador = pontuacaoComputador + 1;
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoComputador++;
+            pontuacaoUsuario++;
             break;
 
 
-        case 'papeltesoura':
-            paperButton_img.classList.add('red-glow');
+        case 'Papeltesoura':
+            PapelButton_img.classList.add('red-glow');
             action = 'perde';
-            pontuacaoComputador = pontuacaoComputador + 1;
+            pontuacaoComputador++;
             break;
-        case 'pedrapapel':
+        case 'Pedrapapel':
             rockButton_img.classList.add('red-glow');
             action = 'perde';
-            pontuacaoComputador = pontuacaoComputador + 1;
+            pontuacaoComputador++;
             break;
-        case 'tesourapedra':
+        case 'Tesourapedra':
             scissorsButton_img.classList.add('red-glow');
             action = 'perde';
-            pontuacaoComputador = pontuacaoComputador + 1;
+            pontuacaoComputador++;
             break;
-        case 'papelpedra':
-            paperButton_img.classList.add('green-glow');
+        case 'Papelpedra':
+            PapelButton_img.classList.add('green-glow');
             action = 'ganha';
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoUsuario++;
             break;
-        case 'pedratesoura':
+        case 'Pedratesoura':
             rockButton_img.classList.add('green-glow');
             action = 'ganha';
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoUsuario++;
             break;
-        case 'tesourapapel':
+        case 'Tesourapapel':
             scissorsButton_img.classList.add('green-glow');
             action = 'ganha';
-            pontuacaoUsuario = pontuacaoUsuario + 1;
+            pontuacaoUsuario++;
             break;
 
     }
-    document.querySelector('#result').innerText = cliqueDoUsuario + ' ' + action + ' de ' + cliqueDoComputador;
-    document.querySelector('#userScore').innerText = pontuacaoUsuario;
-    document.querySelector('#compScore').innerText = pontuacaoComputador;
+
+    result.innerText = cliqueDoUsuario + ' ' + action + ' de ' + cliqueDoComputador;
+    userScore_span.innerText = pontuacaoUsuario;
+    compScore_span.innerText = pontuacaoComputador;
 
 }
 
 function principal() {
 
-    paperButton_img.addEventListener("click", () => jogo('papel'));
-    rockButton_img.addEventListener("click", () => jogo('pedra'));
-    scissorsButton_img.addEventListener("click", () => jogo('tesoura'));
-
-
+    PapelButton_img.addEventListener("click", () => jogo('Papel'));
+    rockButton_img.addEventListener("click", () => jogo('Pedra'));
+    scissorsButton_img.addEventListener("click", () => jogo('Tesoura'));
 
 }
+
+
+function resetar() {
+    resetButton.addEventListener("click", () => {
+
+            pontuacaoUsuario = 0;
+            pontuacaoComputador = 0;
+
+            PapelButton_img.className = "";
+            rockButton_img.className = "";
+            scissorsButton_img.className = "";
+
+            userScore_span.innerText = pontuacaoUsuario;
+            compScore_span.innerText = pontuacaoComputador;
+        }
+
+    )
+}
+resetar();
+
 principal();
